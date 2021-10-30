@@ -1,19 +1,15 @@
 import Banner from 'components/home/Banner';
 import Products from 'components/home/Products';
-import { IProduct } from 'Models/types';
-import React, { useEffect, useState } from 'react';
+import useAsync from 'hooks/useAsync';
+import React from 'react';
 import ProductService from 'services/ProductService';
 
 const Home = () => {
-  const [products, setProducts] = useState<IProduct[]>([] as IProduct[]);
-
-  useEffect(() => {
-    ProductService.getProducts().then((res) => setProducts(res));
-  });
+  const { data: products, isLoading } = useAsync(ProductService.getProducts);
   return (
     <div>
       <Banner />
-      <Products products={products} />
+      <Products isLoading={isLoading} products={products} />
     </div>
   );
 };
