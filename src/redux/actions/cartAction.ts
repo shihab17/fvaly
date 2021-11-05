@@ -16,7 +16,7 @@ export const removeFromCart = (payload: string) => {
 export const clearCart = (payload: string) => {
   return {
     type: ActionType.CLEAR_CART,
-    payload,
+    payload: '',
   };
 };
 
